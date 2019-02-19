@@ -1,0 +1,83 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* [data-selectize] */
+:root {
+    --chip-color: #000;
+    --chip-radius: 100px;
+    --chip-background: #ccc;
+    --chip-outline-width: 1px;
+    --chip-outline-style: solid;
+    --chip-outline-color: #ccc;
+    --drop-down-position-top: 100%;
+}
+
+[data-selectize] {
+    display: flex;
+    padding: 0.5em;
+    flex-wrap: wrap;
+    position: relative;
+    transition: inherit;
+    border-bottom: 1px solid #ccc;
+}
+
+[data-selectize] .chip {
+    display: flex;
+    margin: 0.3em;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 0.5em 1em;
+    align-items: center;
+    justify-content: center;
+    color: var(--chip-color);
+    border-radius: var(--chip-radius);
+    background: var(--chip-background);
+    border: var(--chip-outline-width) var(--chip-outline-style) var(--chip-outline-color);
+}
+
+[data-selectize] input {
+    /* width: 100%; */
+    border: none;
+    outline: none;
+    padding: 0.5em;
+    transition: inherit;
+}
+
+/* [data-selectize] input:not(:focus) {
+    width: 100%;
+} */
+
+[data-selectize] .drop-down {
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    width: 100%;
+    overflow-y: auto;
+    list-style: none;
+    max-height: 200px;
+    transition: 0.25s;
+    position: absolute;
+    border-radius: 10px;
+    background: #ffffff;
+    top: var(--drop-down-position-top);
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-selectize] .drop-down.closed {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+[data-selectize] .drop-down li {
+    padding: 0.7em;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: inherit;
+}
+
+[data-selectize] .drop-down li:hover {
+    background: rgb(230, 230, 230);
+}

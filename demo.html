@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="AgnosticSelectize.css" />
+    <style>
+        html, body {
+            margin: 0;
+            height: 100vh;
+        }
+
+        .app {
+            width: 20%;
+            margin: auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .app > * + *,
+        .select > * + * {
+            margin-top: 1em;
+        }
+
+        .select div {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="app">
+        <div class="select">
+            <div class="select-one" data-selectize></div>
+            <button id="one">get selected values</button>
+        </div>
+        <div class="select">
+            <div class="select-two" data-selectize></div>
+            <button id="two">get selected values</button>
+        </div>
+    </div>
+    
+    <script src="AgnosticSelectize.js"></script>
+    <script>
+        const selectizeOne = new AgnosticSelectize('.select-one');
+        const selectizeTwo = new AgnosticSelectize('.select-two');
+        selectizeOne.style({
+            color: 'blue',
+            rounded: true,
+            outlined: true,
+            background: 'blue',
+            outlineWidth: '1px',
+            outlineStyle: 'solid'
+        });
+
+        selectizeTwo.autoComplete(true);
+        selectizeTwo.onChange(function (e) {
+            let data = [];
+            for (let i = 0; i < random(5, 50); i++) {
+                data.push({
+                    label: `data: ${e.target.value} ${i}`
+                });
+            }
+
+            selectizeTwo.fill(data);
+        });
+
+        const buttonOne = document.querySelector('#one');
+        const buttonTwo = document.querySelector('#two');
+
+        buttonOne.addEventListener('click', () => console.log(selectizeOne.getSelectedItems()));
+        buttonTwo.addEventListener('click', () => console.log(selectizeTwo.getSelectedItems()));
+
+        function random(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+    
+</body>
+</html>
